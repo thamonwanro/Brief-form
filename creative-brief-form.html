@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunbeam Creative — Brief Submission</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    /* Sunbeam brand palette — extracted from logo */
+    --bg: #0e0b0f;
+    --surface: #1a1118;
+    --surface2: #221520;
+    --border: #3a1f30;
+    --accent: #ff2d6b;        /* hot pink/crimson — sun core */
+    --accent2: #4b5ffa;       /* electric blue — reflection base */
+    --accent3: #c42aad;       /* magenta — midpoint gradient */
+    --text: #fff0f5;
+    --muted: #9e7a8e;
+    --danger: #ff5555;
+    --success: #6bffb8;
+    --radius: 10px;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+
+    /* Gradient shorthand */
+    --grad: linear-gradient(135deg, #ff2d6b 0%, #c42aad 50%, #4b5ffa 100%);
+    --grad-text: linear-gradient(90deg, #ff2d6b, #c42aad, #4b5ffa);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Sunbeam atmospheric background — radial glow blobs like the brand visual */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 15% 0%, rgba(255,45,107,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 35% at 85% 10%, rgba(75,95,250,0.1) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 30% at 50% 100%, rgba(196,42,173,0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Subtle grain overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 56px;
+    position: relative;
+  }
+
+  .header-label {
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-label::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 2px;
+    background: var(--grad);
+  }
+
+  .header h1 {
+    font-family: var(--font-head);
+    font-size: clamp(36px, 6vw, 60px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--text);
+  }
+
+  .header h1 span {
+    background: var(--grad-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header-sub {
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 480px;
+    font-weight: 300;
+  }
+
+  .header-line {
+    margin-top: 40px;
+    height: 1px;
+    background: var(--grad);
+    opacity: 0.4;
+  }
+
+  /* Agency brand bar */
+  .agency-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 44px;
+  }
+
+  .agency-logo {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+  }
+
+  .agency-name {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .agency-name .name-main {
+    font-family: var(--font-head);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+
+  .agency-name .name-sub {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--grad-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section-title {
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255,45,107,0.15);
+    border: 1px solid rgba(255,45,107,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* Grid layouts */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  @media (max-width: 600px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* Field */
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field.full { grid-column: 1 / -1; }
+
+  label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  label .req { color: var(--accent); margin-left: 2px; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="url"],
+  input[type="date"],
+  input[type="number"],
+  select,
+  textarea {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    padding: 12px 16px;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.2s, background 0.2s;
+    -webkit-appearance: none;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.6);
+    cursor: pointer;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--accent);
+    background: var(--surface2);
+  }
+
+  input::placeholder, textarea::placeholder { color: var(--muted); opacity: 0.5; }
+
+  select option { background: var(--surface2); }
+
+  textarea { resize: vertical; min-height: 100px; }
+
+  /* Checkbox group */
+  .check-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+
+  .check-item:has(input:checked) {
+    border-color: var(--accent);
+    background: rgba(255,45,107,0.1);
+  }
+
+  .check-item input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    accent-color: var(--accent);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .check-item span {
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  /* File upload */
+  .file-drop {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--surface);
+    position: relative;
+  }
+
+  .file-drop:hover, .file-drop.drag-over {
+    border-color: var(--accent);
+    background: rgba(255,45,107,0.05);
+  }
+
+  .file-drop input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .file-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .file-drop-text {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .file-drop-text strong { color: var(--accent); font-weight: 500; }
+
+  .file-list {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .file-tag {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,45,107,0.08);
+    border: 1px solid rgba(255,45,107,0.2);
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+
+  .file-tag-name { color: var(--accent); }
+  .file-tag-size { color: var(--muted); margin-left: 10px; }
+  .file-remove {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.15s;
+  }
+  .file-remove:hover { color: var(--danger); }
+
+  /* Due date highlight */
+  .due-date-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .due-date-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .due-date-wrap .field { flex: 1; gap: 4px; }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 40px 0;
+  }
+
+  /* Field hint */
+  .hint {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  /* Submit */
+  .submit-zone {
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .btn-submit {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--grad);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 16px 40px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-submit:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(255,45,107,0.35);
+  }
+
+  .btn-submit:active { transform: translateY(0); }
+
+  .btn-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .submit-note {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 24px;
+    max-width: 340px;
+    z-index: 1000;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.success { border-color: rgba(255,45,107,0.4); }
+  .toast.error { border-color: rgba(255,107,107,0.4); }
+
+  .toast-icon { font-size: 20px; flex-shrink: 0; line-height: 1.4; }
+  .toast-title { font-family: var(--font-head); font-weight: 700; font-size: 14px; margin-bottom: 2px; }
+  .toast-msg { font-size: 12px; color: var(--muted); }
+  .toast.success .toast-title { color: var(--accent); }
+  .toast.error .toast-title { color: var(--danger); }
+
+  /* Loading spinner */
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner {
+    width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  /* Validation */
+  .field-error {
+    font-size: 11px;
+    color: var(--danger);
+    margin-top: 3px;
+    display: none;
+  }
+  .field.has-error input,
+  .field.has-error select,
+  .field.has-error textarea {
+    border-color: var(--danger);
+  }
+  .field.has-error .field-error { display: block; }
+
+  /* Fade in */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section {
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .section:nth-child(1) { animation-delay: 0.05s; }
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.15s; }
+  .section:nth-child(4) { animation-delay: 0.2s; }
+  .section:nth-child(5) { animation-delay: 0.25s; }
+  .section:nth-child(6) { animation-delay: 0.3s; }
+  .section:nth-child(7) { animation-delay: 0.35s; }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- Header -->
+  <div class="header">
+
+    <!-- Agency identity bar -->
+    <div class="agency-bar">
+      <!-- Sunbeam logo mark recreated as inline SVG from brand reference -->
+      <svg class="agency-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sunGrad" x1="50" y1="0" x2="50" y2="100" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#ff2d6b"/>
+            <stop offset="50%" stop-color="#c42aad"/>
+            <stop offset="100%" stop-color="#4b5ffa"/>
+          </linearGradient>
+          <clipPath id="topHalf"><rect x="0" y="0" width="100" height="51"/></clipPath>
+          <clipPath id="bottomHalf"><rect x="0" y="51" width="100" height="49"/></clipPath>
+        </defs>
+        <!-- Sun semicircle -->
+        <ellipse cx="50" cy="51" rx="28" ry="28" fill="url(#sunGrad)" clip-path="url(#topHalf)"/>
+        <!-- Horizon bar -->
+        <ellipse cx="50" cy="51" rx="40" ry="5" fill="url(#sunGrad)" opacity="0.9"/>
+        <!-- Reflection ripples — decreasing width, shifting to blue -->
+        <ellipse cx="50" cy="60" rx="32" ry="4"  fill="url(#sunGrad)" opacity="0.75"/>
+        <ellipse cx="50" cy="68" rx="24" ry="3.2" fill="url(#sunGrad)" opacity="0.6"/>
+        <ellipse cx="50" cy="75" rx="17" ry="2.5" fill="url(#sunGrad)" opacity="0.5"/>
+        <ellipse cx="50" cy="81" rx="11" ry="2"   fill="url(#sunGrad)" opacity="0.4"/>
+        <ellipse cx="50" cy="86" rx="7"  ry="1.5" fill="url(#sunGrad)" opacity="0.3"/>
+      </svg>
+
+      <div class="agency-name">
+        <span class="name-main">sunbeam</span>
+        <span class="name-sub">creative</span>
+      </div>
+    </div>
+
+    <div class="header-label">New Project Intake</div>
+    <h1>Creative<br><span>Brief Form</span></h1>
+    <p class="header-sub">Fill in as much detail as possible. The more context you give the team, the stronger the creative output.</p>
+    <div class="header-line"></div>
+  </div>
+
+  <form id="briefForm" novalidate>
+
+    <!-- 01. Client Info -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">01</span> Client & Project</div>
+      <div class="grid-2">
+        <div class="field" id="field-company">
+          <label>Company / Brand Name <span class="req">*</span></label>
+          <input type="text" name="company" placeholder="e.g. Force of Nature" required>
+          <div class="field-error">This field is required.</div>
+        </div>
+        <div class="field" id="field-project">
+          <label>Project Name <span class="req">*</span></label>
+          <input type="text" name="project" placeholder="e.g. Summer Launch Campaign" required>
+          <div class="field-error">This field is required.</div>
+        </div>
+        <div class="field" id="field-contact_name">
+          <label>Contact Name <span class="req">*</span></label>
+          <input type="text" name="contact_name" placeholder="Full name" required>
+          <div class="field-error">This field is required.</div>
+        </div>
+        <div class="field" id="field-contact_email">
+          <label>Contact Email <span class="req">*</span></label>
+          <input type="email" name="contact_email" placeholder="name@company.com" required>
+          <div class="field-error">Please enter a valid email.</div>
+        </div>
+        <div class="field full" id="field-background">
+          <label>Company / Brand Background <span class="req">*</span></label>
+          <textarea name="background" placeholder="What does this company do? What's their market position, history, and key differentiators?" rows="4" required></textarea>
+          <div class="field-error">This field is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02. Advertising Objective -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">02</span> Why Are We Advertising?</div>
+      <div class="grid-2">
+        <div class="field full" id="field-objective">
+          <label>Campaign Objective <span class="req">*</span></label>
+          <textarea name="objective" placeholder="What do we want to achieve? (e.g. launch new product, raise brand awareness, drive sales, change perception...)" rows="3" required></textarea>
+          <div class="field-error">This field is required.</div>
+        </div>
+        <div class="field full">
+          <label>Campaign Type</label>
+          <div class="check-group">
+            <label class="check-item"><input type="checkbox" name="campaign_type" value="Brand Awareness"> <span>Brand Awareness</span></label>
+            <label class="check-item"><input type="checkbox" name="campaign_type" value="Product Launch"> <span>Product Launch</span></label>
+            <label class="check-item"><input type="checkbox" name="campaign_type" value="Promotion / Offer"> <span>Promotion / Offer</span></label>
+            <label class="check-item"><input type="checkbox" name="campaign_type" value="Lead Generation"> <span>Lead Generation</span></label>
+            <label class="check-item"><input type="checkbox" name="campaign_type" value="Retention / Loyalty"> <span>Retention / Loyalty</span></label>
+            <label class="check-item"><input type="checkbox" name="campaign_type" value="Event"> <span>Event</span></label>
+            <label class="check-item"><input type="checkbox" name="campaign_type" value="Rebranding"> <span>Rebranding</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03. Target Audience -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">03</span> Target Audience</div>
+      <div class="grid-2">
+        <div class="field" id="field-audience_primary">
+          <label>Primary Audience <span class="req">*</span></label>
+          <textarea name="audience_primary" placeholder="Demographics, lifestyle, behaviors (e.g. Women 25–35, busy professionals, eco-conscious shoppers)" rows="3" required></textarea>
+          <div class="field-error">This field is required.</div>
+        </div>
+        <div class="field">
+          <label>Secondary Audience</label>
+          <textarea name="audience_secondary" placeholder="Any secondary group we should consider?" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Consumer Insight</label>
+          <textarea name="consumer_insight" placeholder="What does the audience think, feel, or believe right now? What's their tension or unmet need?" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Consumer Enemy</label>
+          <textarea name="consumer_enemy" placeholder="What's the biggest barrier or friction the audience faces? (e.g. guilt, time, confusion, price)" rows="3"></textarea>
+        </div>
+        <div class="field full">
+          <label>What Do We Want Them to Do?</label>
+          <input type="text" name="consumer_action" placeholder="e.g. Try the product, follow on social, sign up for a newsletter...">
+        </div>
+      </div>
+    </div>
+
+    <!-- 04. Message & Brand -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">04</span> Message & Brand Voice</div>
+      <div class="grid-2">
+        <div class="field full" id="field-main_message">
+          <label>Main Message / Key Idea <span class="req">*</span></label>
+          <input type="text" name="main_message" placeholder="One sentence — what is the single most important thing we want people to remember?" required>
+          <div class="field-error">This field is required.</div>
+        </div>
+        <div class="field">
+          <label>Support Points</label>
+          <textarea name="support_points" placeholder="What facts, proof, or reasons back up the main message? (e.g. 100 calories, 2g carbs, matched competitors on taste)" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Brand Idea / Positioning</label>
+          <textarea name="brand_idea" placeholder="How would you describe the brand's core promise in one sentence?" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Tone of Voice <span class="req">*</span></label>
+          <input type="text" id="field-tone" name="tone" placeholder="e.g. Bright and joyful, Enabling and wise, Fun and irreverent" required>
+          <div class="field-error" id="tone-error">This field is required.</div>
+        </div>
+        <div class="field">
+          <label>Brand Assets to Use</label>
+          <textarea name="brand_assets" placeholder="Logos, taglines, mascots, signature visuals, color palette, fonts..." rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Mandatory Inclusions</label>
+          <textarea name="mandatories" placeholder="Legal disclaimers, logos, hashtags, CTAs that must appear in every execution" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05. Platforms & Deliverables -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">05</span> Platforms & Deliverables</div>
+      <div class="grid-2">
+        <div class="field full">
+          <label>Platforms</label>
+          <div class="check-group">
+            <label class="check-item"><input type="checkbox" name="platforms" value="Instagram"> <span>Instagram</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="TikTok"> <span>TikTok</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="Facebook"> <span>Facebook</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="YouTube"> <span>YouTube</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="Twitter/X"> <span>Twitter / X</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="LinkedIn"> <span>LinkedIn</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="TV / OOH"> <span>TV / OOH</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="Print"> <span>Print</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="Microsite"> <span>Microsite</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="In-store"> <span>In-store / Event</span></label>
+          </div>
+        </div>
+        <div class="field full">
+          <label>Deliverables Needed</label>
+          <textarea name="deliverables" placeholder="e.g. 3 x short-form videos (15s), 5 x static posts, 1 x hero visual, 2 x stories, 1 x 30-sec TV spot..." rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06. Budget & Stakeholders -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">06</span> Budget & Team</div>
+      <div class="grid-3">
+        <div class="field">
+          <label>Total Budget</label>
+          <input type="text" name="budget" placeholder="e.g. $15,000 or THB 500,000">
+        </div>
+        <div class="field">
+          <label>Budget Breakdown</label>
+          <input type="text" name="budget_breakdown" placeholder="e.g. $5k each for FB, IG, TikTok">
+        </div>
+        <div class="field">
+          <label>Budget Flexibility</label>
+          <select name="budget_flex">
+            <option value="">Select...</option>
+            <option>Fixed — no changes</option>
+            <option>Slightly flexible (±10%)</option>
+            <option>Flexible if justified</option>
+            <option>TBD</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Client CEO / Decision Maker</label>
+          <input type="text" name="stakeholder_ceo" placeholder="Name & role">
+        </div>
+        <div class="field">
+          <label>Day-to-Day Contact</label>
+          <input type="text" name="stakeholder_contact" placeholder="Name & role">
+        </div>
+        <div class="field">
+          <label>Internal Team (assigned)</label>
+          <input type="text" name="stakeholder_internal" placeholder="e.g. Jenny L. — Social, Mark A. — TikTok">
+        </div>
+      </div>
+    </div>
+
+    <!-- 07. Timeline & Due Date -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">07</span> Timeline & Deadline</div>
+
+      <div class="due-date-wrap" style="margin-bottom: 16px;">
+        <div class="due-date-icon">📅</div>
+        <div class="field" id="field-due_date">
+          <label>Brief Due Date (Creative Concept Presentation) <span class="req">*</span></label>
+          <input type="date" name="due_date" required>
+          <div class="field-error">Please select a due date.</div>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="field">
+          <label>First Asset Live Date</label>
+          <input type="date" name="live_date_1">
+          <p class="hint">e.g. First Instagram post</p>
+        </div>
+        <div class="field">
+          <label>Second Asset Live Date</label>
+          <input type="date" name="live_date_2">
+          <p class="hint">e.g. TikTok videos go live</p>
+        </div>
+        <div class="field">
+          <label>Campaign End Date</label>
+          <input type="date" name="end_date">
+        </div>
+        <div class="field full">
+          <label>Timeline Notes</label>
+          <textarea name="timeline_notes" placeholder="Any key milestones, approval rounds, or blackout periods to be aware of?" rows="2"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 08. References & Attachments -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">08</span> References & Attachments</div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label>Competitor / Reference Links</label>
+          <textarea name="references" placeholder="URLs of campaigns, brands, or executions you love (or want to avoid)" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Additional Notes for Creative Team</label>
+          <textarea name="notes" placeholder="Anything else the team should know — constraints, sensitivities, inspirations, previous work to build on..." rows="3"></textarea>
+        </div>
+
+        <div class="field full">
+          <label>Attach Reference Files</label>
+          <div class="file-drop" id="fileDrop">
+            <input type="file" id="fileInput" multiple accept=".pdf,.pptx,.ppt,.jpg,.jpeg,.png,.gif,.webp,.key">
+            <div class="file-icon">📎</div>
+            <div class="file-drop-text">
+              <strong>Click to browse</strong> or drag & drop files here<br>
+              <span style="font-size:11px">Accepts: PDF, PPTX, PPT, JPEG, PNG, GIF, WebP, Keynote — max 10MB per file</span>
+            </div>
+          </div>
+          <div class="file-list" id="fileList"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Submit -->
+    <div class="submit-zone">
+      <button type="submit" class="btn-submit" id="submitBtn">Open in Email Client →</button>
+      <p class="submit-note">This will open your email client pre-filled and addressed to the Sunbeam creative team. Just hit Send.</p>
+    </div>
+
+  </form>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <div class="toast-icon" id="toastIcon"></div>
+  <div>
+    <div class="toast-title" id="toastTitle"></div>
+    <div class="toast-msg" id="toastMsg"></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// RECIPIENTS — mailto will address both
+// ============================================================
+const TO_EMAILS = 'CHAWANVIT.BO@PLANBMEDIA.CO.TH,SUNBEAM_GROUP@PLANBMEDIA.CO.TH';
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+// ============================================================
+
+// --- File handling ---
+let attachedFiles = [];
+
+const fileDrop = document.getElementById('fileDrop');
+const fileInput = document.getElementById('fileInput');
+const fileList  = document.getElementById('fileList');
+
+fileDrop.addEventListener('dragover', e => { e.preventDefault(); fileDrop.classList.add('drag-over'); });
+fileDrop.addEventListener('dragleave', () => fileDrop.classList.remove('drag-over'));
+fileDrop.addEventListener('drop', e => {
+  e.preventDefault();
+  fileDrop.classList.remove('drag-over');
+  handleFiles(Array.from(e.dataTransfer.files));
+});
+fileInput.addEventListener('change', () => handleFiles(Array.from(fileInput.files)));
+
+function handleFiles(files) {
+  files.forEach(f => {
+    if (f.size > MAX_FILE_SIZE) {
+      showToast('error', 'File too large', `"${f.name}" exceeds the 10MB limit.`);
+      return;
+    }
+    if (attachedFiles.find(x => x.name === f.name && x.size === f.size)) return;
+    attachedFiles.push(f);
+  });
+  renderFileList();
+  fileInput.value = '';
+}
+
+function renderFileList() {
+  fileList.innerHTML = '';
+  attachedFiles.forEach((f, i) => {
+    const size = f.size > 1024*1024 ? (f.size/1024/1024).toFixed(1)+'MB' : (f.size/1024).toFixed(0)+'KB';
+    const tag = document.createElement('div');
+    tag.className = 'file-tag';
+    tag.innerHTML = `
+      <div>
+        <span class="file-tag-name">📄 ${escHtml(f.name)}</span>
+        <span class="file-tag-size">${size}</span>
+      </div>
+      <button class="file-remove" type="button" onclick="removeFile(${i})" title="Remove">✕</button>
+    `;
+    fileList.appendChild(tag);
+  });
+}
+
+function removeFile(i) {
+  attachedFiles.splice(i, 1);
+  renderFileList();
+}
+
+// --- Helpers ---
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function getChecked(name) {
+  return Array.from(document.querySelectorAll(`[name="${name}"]:checked`))
+    .map(el => el.value).join(', ') || '—';
+}
+
+function val(name) {
+  const el = document.querySelector(`[name="${name}"]`);
+  return el && el.value.trim() ? el.value.trim() : '—';
+}
+
+// --- Validation ---
+function validateField(fieldId, input) {
+  const wrapper = document.getElementById('field-' + fieldId);
+  if (!wrapper) return true;
+  const isValid = input.checkValidity() && input.value.trim() !== '';
+  wrapper.classList.toggle('has-error', !isValid);
+  return isValid;
+}
+
+function validateAll() {
+  const required = [
+    { id: 'company',          el: document.querySelector('[name="company"]') },
+    { id: 'project',          el: document.querySelector('[name="project"]') },
+    { id: 'contact_name',     el: document.querySelector('[name="contact_name"]') },
+    { id: 'contact_email',    el: document.querySelector('[name="contact_email"]') },
+    { id: 'background',       el: document.querySelector('[name="background"]') },
+    { id: 'objective',        el: document.querySelector('[name="objective"]') },
+    { id: 'audience_primary', el: document.querySelector('[name="audience_primary"]') },
+    { id: 'main_message',     el: document.querySelector('[name="main_message"]') },
+    { id: 'due_date',         el: document.querySelector('[name="due_date"]') },
+  ];
+
+  const toneEl    = document.querySelector('[name="tone"]');
+  const toneValid = toneEl.value.trim() !== '';
+  document.getElementById('field-tone').classList.toggle('has-error', !toneValid);
+
+  let allValid = toneValid;
+  required.forEach(({ id, el }) => { if (!validateField(id, el)) allValid = false; });
+  return allValid;
+}
+
+// --- Submit: build mailto and open ---
+document.getElementById('briefForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  if (!validateAll()) {
+    showToast('error', 'Required fields missing', 'Please fill in all highlighted fields.');
+    document.querySelector('.has-error')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  const fileNames = attachedFiles.length
+    ? attachedFiles.map(f => f.name).join(', ')
+    : 'None attached';
+
+  const subject = `[Creative Brief] ${val('project')} — ${val('company')} | Due: ${val('due_date')}`;
+
+  const body = [
+    '════════════════════════════════════',
+    '  NEW CREATIVE BRIEF SUBMISSION',
+    '════════════════════════════════════',
+    '',
+    '▌ CLIENT & PROJECT',
+    `  Company       : ${val('company')}`,
+    `  Project       : ${val('project')}`,
+    `  Contact       : ${val('contact_name')}`,
+    `  Contact Email : ${val('contact_email')}`,
+    '',
+    '▌ COMPANY BACKGROUND',
+    `  ${val('background')}`,
+    '',
+    '▌ CAMPAIGN OBJECTIVE',
+    `  ${val('objective')}`,
+    `  Type: ${getChecked('campaign_type')}`,
+    '',
+    '▌ TARGET AUDIENCE',
+    `  Primary   : ${val('audience_primary')}`,
+    `  Secondary : ${val('audience_secondary')}`,
+    `  Insight   : ${val('consumer_insight')}`,
+    `  Enemy     : ${val('consumer_enemy')}`,
+    `  We want them to: ${val('consumer_action')}`,
+    '',
+    '▌ MESSAGE & BRAND VOICE',
+    `  Main Message   : ${val('main_message')}`,
+    `  Support Points : ${val('support_points')}`,
+    `  Brand Idea     : ${val('brand_idea')}`,
+    `  Tone of Voice  : ${val('tone')}`,
+    `  Brand Assets   : ${val('brand_assets')}`,
+    `  Mandatories    : ${val('mandatories')}`,
+    '',
+    '▌ PLATFORMS & DELIVERABLES',
+    `  Platforms    : ${getChecked('platforms')}`,
+    `  Deliverables : ${val('deliverables')}`,
+    '',
+    '▌ BUDGET & TEAM',
+    `  Total Budget : ${val('budget')}`,
+    `  Breakdown    : ${val('budget_breakdown')}`,
+    `  Flexibility  : ${val('budget_flex')}`,
+    `  Decision Maker : ${val('stakeholder_ceo')}`,
+    `  Day-to-Day   : ${val('stakeholder_contact')}`,
+    `  Internal Team: ${val('stakeholder_internal')}`,
+    '',
+    '▌ TIMELINE & DEADLINE',
+    `  ⚡ Brief Due Date    : ${val('due_date')}`,
+    `  First Asset Live   : ${val('live_date_1')}`,
+    `  Second Asset Live  : ${val('live_date_2')}`,
+    `  Campaign End Date  : ${val('end_date')}`,
+    `  Timeline Notes     : ${val('timeline_notes')}`,
+    '',
+    '▌ REFERENCES & NOTES',
+    `  Reference Links : ${val('references')}`,
+    `  Notes           : ${val('notes')}`,
+    '',
+    '▌ ATTACHED FILES',
+    `  ${fileNames}`,
+    '',
+    attachedFiles.length
+      ? '⚠️  Please manually attach the listed files to this email before sending.'
+      : '',
+    '',
+    '════════════════════════════════════',
+  ].join('\n');
+
+  const mailto = `mailto:${TO_EMAILS}`
+    + `?subject=${encodeURIComponent(subject)}`
+    + `&body=${encodeURIComponent(body)}`;
+
+  window.location.href = mailto;
+
+  // Show confirmation toast and attach reminder if files exist
+  if (attachedFiles.length) {
+    showToast('success', 'Email client opening…',
+      `Remember to manually attach ${attachedFiles.length} file(s) before sending.`);
+  } else {
+    showToast('success', 'Email client opening…',
+      'Review the draft and hit Send when ready.');
+  }
+});
+
+// --- Toast ---
+let toastTimer;
+function showToast(type, title, msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastIcon').textContent  = type === 'success' ? '✅' : '⚠️';
+  document.getElementById('toastTitle').textContent = title;
+  document.getElementById('toastMsg').textContent   = msg;
+  t.className = `toast ${type} show`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 6000);
+}
+
+// Live validation on blur
+document.querySelectorAll('input[required], textarea[required]').forEach(el => {
+  el.addEventListener('blur', () => validateField(el.getAttribute('name'), el));
+});
+</script>
+</body>
+</html>
