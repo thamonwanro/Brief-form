@@ -1,0 +1,639 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunbeam Creative — Brief Submission</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<style>
+  :root {
+    --bg: #0e0b0f;
+    --surface: #1a1118;
+    --surface2: #221520;
+    --border: #3a1f30;
+    --accent: #ff2d6b;
+    --accent2: #4b5ffa;
+    --accent3: #c42aad;
+    --text: #fff0f5;
+    --muted: #9e7a8e;
+    --danger: #ff5555;
+    --success: #6bffb8;
+    --radius: 10px;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --grad: linear-gradient(135deg, #ff2d6b 0%, #c42aad 50%, #4b5ffa 100%);
+    --grad-text: linear-gradient(90deg, #ff2d6b, #c42aad, #4b5ffa);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 15% 0%, rgba(255,45,107,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 35% at 85% 10%, rgba(75,95,250,0.1) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 30% at 50% 100%, rgba(196,42,173,0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+  }
+
+  .header { margin-bottom: 56px; position: relative; }
+
+  .header-label {
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .header-label::before { content: ''; display: inline-block; width: 28px; height: 2px; background: var(--grad); }
+
+  .header h1 {
+    font-family: var(--font-head);
+    font-size: clamp(36px, 6vw, 60px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--text);
+  }
+  .header h1 span { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .header-sub { margin-top: 16px; color: var(--muted); font-size: 15px; max-width: 480px; font-weight: 300; }
+  .header-line { margin-top: 40px; height: 1px; background: var(--grad); opacity: 0.4; }
+
+  .agency-bar { display: flex; align-items: center; gap: 14px; margin-bottom: 44px; }
+  .agency-logo { width: 52px; height: 52px; flex-shrink: 0; }
+  .agency-name { display: flex; flex-direction: column; line-height: 1.1; }
+  .agency-name .name-main { font-family: var(--font-head); font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: #fff; }
+  .agency-name .name-sub { font-family: var(--font-body); font-size: 12px; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .section { margin-bottom: 48px; }
+
+  .section-title {
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: rgba(255,45,107,0.15);
+    border: 1px solid rgba(255,45,107,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field.full { grid-column: 1 / -1; }
+
+  label { font-size: 12px; font-weight: 500; letter-spacing: 0.05em; color: var(--muted); text-transform: uppercase; }
+  label .req { color: var(--accent); margin-left: 2px; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="url"],
+  input[type="date"],
+  input[type="number"],
+  select,
+  textarea {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    padding: 12px 16px;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.2s, background 0.2s;
+    -webkit-appearance: none;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); cursor: pointer; }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); background: var(--surface2); }
+  input::placeholder, textarea::placeholder { color: var(--muted); opacity: 0.5; }
+  select option { background: var(--surface2); }
+  textarea { resize: vertical; min-height: 100px; }
+
+  .check-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+  .check-item { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; cursor: pointer; transition: all 0.15s; user-select: none; }
+  .check-item:has(input:checked) { border-color: var(--accent); background: rgba(255,45,107,0.1); }
+  .check-item input[type="checkbox"] { width: 14px; height: 14px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+  .check-item span { font-size: 13px; color: var(--text); }
+
+  .due-date-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; display: flex; align-items: center; gap: 16px; }
+  .due-date-icon { font-size: 28px; flex-shrink: 0; }
+  .due-date-wrap .field { flex: 1; gap: 4px; }
+
+  .divider { height: 1px; background: var(--border); margin: 40px 0; }
+  .hint { font-size: 11px; color: var(--muted); margin-top: 2px; font-style: italic; }
+
+  .submit-zone { margin-top: 48px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+
+  .btn-submit {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--grad);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 16px 40px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+    min-width: 180px;
+  }
+  .btn-submit:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 8px 28px rgba(255,45,107,0.35); }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .btn-progress { position: absolute; left: 0; top: 0; height: 100%; background: rgba(255,255,255,0.15); width: 0; transition: width 0.4s ease; }
+
+  .submit-note { font-size: 12px; color: var(--muted); font-style: italic; }
+
+  .toast {
+    position: fixed;
+    bottom: 32px; right: 32px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 24px;
+    max-width: 340px;
+    z-index: 1000;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.success { border-color: rgba(107,255,184,0.4); }
+  .toast.error   { border-color: rgba(255,85,85,0.4); }
+  .toast-icon { font-size: 20px; flex-shrink: 0; line-height: 1.4; }
+  .toast-title { font-family: var(--font-head); font-weight: 700; font-size: 14px; margin-bottom: 2px; }
+  .toast-msg { font-size: 12px; color: var(--muted); }
+  .toast.success .toast-title { color: var(--success); }
+  .toast.error   .toast-title { color: var(--danger); }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner {
+    width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  .field-error { font-size: 11px; color: var(--danger); margin-top: 3px; display: none; }
+  .field.has-error input,
+  .field.has-error select,
+  .field.has-error textarea { border-color: var(--danger); }
+  .field.has-error .field-error { display: block; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .section { animation: fadeUp 0.5s ease both; }
+  .section:nth-child(1){animation-delay:0.05s} .section:nth-child(2){animation-delay:0.1s}
+  .section:nth-child(3){animation-delay:0.15s} .section:nth-child(4){animation-delay:0.2s}
+  .section:nth-child(5){animation-delay:0.25s} .section:nth-child(6){animation-delay:0.3s}
+  .section:nth-child(7){animation-delay:0.35s}
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <div class="header">
+    <div class="agency-bar">
+      <svg class="agency-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sunGrad" x1="50" y1="0" x2="50" y2="100" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#ff2d6b"/>
+            <stop offset="50%" stop-color="#c42aad"/>
+            <stop offset="100%" stop-color="#4b5ffa"/>
+          </linearGradient>
+          <clipPath id="topHalf"><rect x="0" y="0" width="100" height="51"/></clipPath>
+          <clipPath id="bottomHalf"><rect x="0" y="51" width="100" height="49"/></clipPath>
+        </defs>
+        <ellipse cx="50" cy="51" rx="28" ry="28" fill="url(#sunGrad)" clip-path="url(#topHalf)"/>
+        <ellipse cx="50" cy="51" rx="40" ry="5" fill="url(#sunGrad)" opacity="0.9"/>
+        <ellipse cx="50" cy="60" rx="32" ry="4"  fill="url(#sunGrad)" opacity="0.75"/>
+        <ellipse cx="50" cy="68" rx="24" ry="3.2" fill="url(#sunGrad)" opacity="0.6"/>
+        <ellipse cx="50" cy="75" rx="17" ry="2.5" fill="url(#sunGrad)" opacity="0.5"/>
+        <ellipse cx="50" cy="81" rx="11" ry="2"   fill="url(#sunGrad)" opacity="0.4"/>
+        <ellipse cx="50" cy="86" rx="7"  ry="1.5" fill="url(#sunGrad)" opacity="0.3"/>
+      </svg>
+      <div class="agency-name">
+        <span class="name-main">sunbeam</span>
+        <span class="name-sub">creative</span>
+      </div>
+    </div>
+
+    <div class="header-label">New Project Intake</div>
+    <h1>Creative<br><span>Brief Form</span></h1>
+    <p class="header-sub">Fill in as much detail as possible. The more context you give the team, the stronger the creative output.</p>
+    <div class="header-line"></div>
+  </div>
+
+  <form id="briefForm" novalidate>
+
+    <!-- 01. Client Info -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">01</span> Client & Project</div>
+      <div class="grid-2">
+        <div class="field" id="field-company">
+          <label>Company / Brand Name <span class="req">*</span></label>
+          <input type="text" name="company" placeholder="e.g. Force of Nature" required>
+          <div class="field-error">This field is required.</div>
+        </div>
+        <div class="field" id="field-project">
+          <label>Project Name <span class="req">*</span></label>
+          <input type="text" name="project" placeholder="e.g. Summer Launch Campaign" required>
+          <div class="field-error">This field is required.</div>
+        </div>
+        <div class="field" id="field-contact_name">
+          <label>Contact Name <span class="req">*</span></label>
+          <input type="text" name="contact_name" placeholder="Full name" required>
+          <div class="field-error">This field is required.</div>
+        </div>
+        <div class="field" id="field-contact_email">
+          <label>Contact Email <span class="req">*</span></label>
+          <input type="email" name="contact_email" placeholder="name@company.com" required>
+          <div class="field-error">Please enter a valid email.</div>
+        </div>
+        <div class="field full" id="field-background">
+          <label>Company / Brand Background <span class="req">*</span></label>
+          <textarea name="background" placeholder="What does this company do? What's their market position, history, and key differentiators?" rows="4" required></textarea>
+          <div class="field-error">This field is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02. Advertising Objective -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">02</span> Why Are We Advertising?</div>
+      <div class="grid-2">
+        <div class="field full" id="field-objective">
+          <label>Campaign Objective <span class="req">*</span></label>
+          <textarea name="objective" placeholder="What do we want to achieve? (e.g. launch new product, raise brand awareness, drive sales, change perception...)" rows="3" required></textarea>
+          <div class="field-error">This field is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03. Target Audience -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">03</span> Target Audience</div>
+      <div class="field" id="field-audience_primary">
+        <label>Target Audience <span class="req">*</span></label>
+        <textarea name="audience_primary" placeholder="Demographics, lifestyle, behaviors (e.g. Women 25–35, busy professionals, eco-conscious shoppers)" rows="3" required></textarea>
+        <div class="field-error">This field is required.</div>
+      </div>
+    </div>
+
+    <!-- 04. Message & Brand -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">04</span> Message & Brand Voice</div>
+      <div class="field" id="field-main_message">
+        <label>Main Message / Key Idea <span class="req">*</span></label>
+        <input type="text" name="main_message" placeholder="One sentence — what is the single most important thing we want people to remember?" required>
+        <div class="field-error">This field is required.</div>
+      </div>
+    </div>
+
+    <!-- 05. Deliverables -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">05</span> Deliverables</div>
+      <div class="grid-2">
+        <div class="field full">
+          <label>Deliverables</label>
+          <div class="check-group">
+            <label class="check-item"><input type="checkbox" name="platforms" value="Creative Proposal"><span>Creative Proposal</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="IMC"><span>IMC</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="Key Visual / Animate"><span>Key Visual / Animate</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="3D"><span>3D</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="Others"><span>Others</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06. Budget -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">06</span> Budget</div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Total Budget</label>
+          <input type="text" name="budget" placeholder="e.g. THB 500,000">
+        </div>
+      </div>
+    </div>
+
+    <!-- 07. Timeline -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">07</span> Timeline</div>
+      <div class="due-date-wrap">
+        <div class="due-date-icon">📅</div>
+        <div class="field" id="field-due_date">
+          <label>Brief Due Date <span class="req">*</span></label>
+          <input type="date" name="due_date" required>
+          <div class="field-error">Please select a due date.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 08. References & Notes -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">08</span> References & Notes</div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Reference YouTube Links</label>
+          <textarea name="references" placeholder="YouTube links of campaigns or references you love (or want to avoid)" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Additional Notes for Creative Team</label>
+          <textarea name="notes" placeholder="Anything else the team should know — constraints, sensitivities, inspirations, previous work to build on..." rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 09. File Reference -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">09</span> File Reference</div>
+      <div class="field">
+        <label>Google Drive Link</label>
+        <textarea name="drive_link" placeholder="Upload your Google Drive link of the files" rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="submit-zone">
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <span class="btn-progress" id="btnProgress"></span>
+        <span id="btnLabel">Submit →</span>
+      </button>
+      <p class="submit-note">Sends to the Sunbeam creative team via EmailJS + opens your email client as backup.</p>
+    </div>
+
+  </form>
+</div>
+
+<div class="toast" id="toast">
+  <div class="toast-icon" id="toastIcon"></div>
+  <div>
+    <div class="toast-title" id="toastTitle"></div>
+    <div class="toast-msg" id="toastMsg"></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+//  EMAILJS CONFIG — แก้ 3 ค่านี้ให้ตรงกับ account ของคุณ
+// ============================================================
+const EMAILJS_PUBLIC_KEY  = 'bqyWs0ImU4HQK7f5A';
+const EMAILJS_SERVICE_ID  = 'service_e3m09u2';
+const EMAILJS_TEMPLATE_ID = 'template_oowx9jh';
+const TO_EMAILS = 'chawanvit.bo@planbmedia.co.th,SUNBEAM_GROUP@PLANBMEDIA.CO.TH';
+// ============================================================
+
+emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+// ── Helpers ────────────────────────────────────────────────
+function getChecked(name) {
+  return Array.from(document.querySelectorAll(`[name="${name}"]:checked`))
+    .map(el => el.value).join(', ') || '—';
+}
+
+function val(name) {
+  const el = document.querySelector(`[name="${name}"]`);
+  return el && el.value.trim() ? el.value.trim() : '—';
+}
+
+// ── Build shared email body ────────────────────────────────
+function buildBody() {
+  return [
+    '════════════════════════════════════',
+    '  NEW CREATIVE BRIEF SUBMISSION',
+    '════════════════════════════════════',
+    '',
+    '▌ CLIENT & PROJECT',
+    `  Company       : ${val('company')}`,
+    `  Project       : ${val('project')}`,
+    `  Contact       : ${val('contact_name')}`,
+    `  Contact Email : ${val('contact_email')}`,
+    '',
+    '▌ COMPANY BACKGROUND',
+    `  ${val('background')}`,
+    '',
+    '▌ CAMPAIGN OBJECTIVE',
+    `  ${val('objective')}`,
+    '',
+    '▌ TARGET AUDIENCE',
+    `  ${val('audience_primary')}`,
+    '',
+    '▌ MAIN MESSAGE',
+    `  ${val('main_message')}`,
+    '',
+    '▌ DELIVERABLES',
+    `  ${getChecked('platforms')}`,
+    '',
+    '▌ BUDGET',
+    `  ${val('budget')}`,
+    '',
+    '▌ TIMELINE',
+    `  Brief Due Date : ${val('due_date')}`,
+    '',
+    '▌ REFERENCES & NOTES',
+    `  Reference Links : ${val('references')}`,
+    `  Notes           : ${val('notes')}`,
+    '',
+    '▌ FILE REFERENCE (Google Drive)',
+    `  ${val('drive_link')}`,
+    '',
+    '════════════════════════════════════',
+  ].join('\n');
+}
+
+// ── Open email client (mailto) — ทำก่อน await เพื่อหลีกเลี่ยง popup blocker ──
+function openMailto(subject, body) {
+  const a = document.createElement('a');
+  a.href = `mailto:${TO_EMAILS}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => document.body.removeChild(a), 500);
+}
+
+// ── Validation ─────────────────────────────────────────────
+function validateField(fieldId, input) {
+  const wrapper = document.getElementById('field-' + fieldId);
+  if (!wrapper) return true;
+  const isValid = input.checkValidity() && input.value.trim() !== '';
+  wrapper.classList.toggle('has-error', !isValid);
+  return isValid;
+}
+
+function validateAll() {
+  const required = [
+    { id: 'company',          el: document.querySelector('[name="company"]') },
+    { id: 'project',          el: document.querySelector('[name="project"]') },
+    { id: 'contact_name',     el: document.querySelector('[name="contact_name"]') },
+    { id: 'contact_email',    el: document.querySelector('[name="contact_email"]') },
+    { id: 'background',       el: document.querySelector('[name="background"]') },
+    { id: 'objective',        el: document.querySelector('[name="objective"]') },
+    { id: 'audience_primary', el: document.querySelector('[name="audience_primary"]') },
+    { id: 'main_message',     el: document.querySelector('[name="main_message"]') },
+    { id: 'due_date',         el: document.querySelector('[name="due_date"]') },
+  ];
+  let allValid = true;
+  required.forEach(({ id, el }) => { if (!validateField(id, el)) allValid = false; });
+  return allValid;
+}
+
+// ── Submit ─────────────────────────────────────────────────
+document.getElementById('briefForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  if (!validateAll()) {
+    showToast('error', 'Required fields missing', 'Please fill in all highlighted fields.');
+    document.querySelector('.has-error')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  const subject = `[Creative Brief] ${val('project')} — ${val('company')} | Due: ${val('due_date')}`;
+  const body    = buildBody();
+
+  // ① เปิด email client ทันที (ต้องทำก่อน await เพื่อหลีกเลี่ยง popup blocker)
+  openMailto(subject, body);
+
+  // ② ส่งผ่าน EmailJS
+  setLoading(true);
+
+  const params = {
+    to_email:      TO_EMAILS,
+    reply_to:      val('contact_email'),
+    subject,
+    body,
+    // individual fields สำหรับใช้ใน EmailJS template
+    company:       val('company'),
+    project:       val('project'),
+    contact_name:  val('contact_name'),
+    contact_email: val('contact_email'),
+    background:    val('background'),
+    objective:     val('objective'),
+    audience:      val('audience_primary'),
+    main_message:  val('main_message'),
+    deliverables:  getChecked('platforms'),
+    budget:        val('budget'),
+    due_date:      val('due_date'),
+    references:    val('references'),
+    notes:         val('notes'),
+    drive_link:    val('drive_link'),
+  };
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+    setLoading(false);
+    showToast('success', 'Brief sent! ✓', 'Sent via EmailJS. Email client opened as backup.');
+    document.getElementById('briefForm').reset();
+  } catch (err) {
+    setLoading(false);
+    console.error('EmailJS error:', err);
+    showToast('error', 'EmailJS failed — check email client', `Error: ${err?.text || err?.message || 'Unknown'}. Email client draft is your backup.`);
+  }
+});
+
+// ── Loading state ──────────────────────────────────────────
+function setLoading(on) {
+  const btn = document.getElementById('submitBtn');
+  const lbl = document.getElementById('btnLabel');
+  const bar = document.getElementById('btnProgress');
+  btn.disabled = on;
+  if (on) {
+    lbl.innerHTML = '<span class="spinner"></span>Sending…';
+    bar.style.width = '75%';
+  } else {
+    lbl.textContent = 'Submit →';
+    bar.style.width = '0';
+  }
+}
+
+// ── Toast ──────────────────────────────────────────────────
+let toastTimer;
+function showToast(type, title, msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastIcon').textContent  = type === 'success' ? '✅' : '⚠️';
+  document.getElementById('toastTitle').textContent = title;
+  document.getElementById('toastMsg').textContent   = msg;
+  t.className = `toast ${type} show`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 7000);
+}
+
+// ── Live validation on blur ────────────────────────────────
+document.querySelectorAll('input[required], textarea[required]').forEach(el => {
+  el.addEventListener('blur', () => validateField(el.getAttribute('name'), el));
+});
+</script>
+</body>
+</html>
