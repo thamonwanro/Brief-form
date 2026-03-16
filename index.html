@@ -432,7 +432,7 @@
         <span class="btn-progress" id="btnProgress"></span>
         <span id="btnLabel">Submit →</span>
       </button>
-      <p class="submit-note">Sends to the Sunbeam creative team via EmailJS + opens your email client as backup.</p>
+      <p class="submit-note">Sends to the Sunbeam creative team via EmailJS.</p>
     </div>
 
   </form>
@@ -452,7 +452,7 @@
 // ============================================================
 const EMAILJS_PUBLIC_KEY  = 'bqyWs0ImU4HQK7f5A';
 const EMAILJS_SERVICE_ID  = 'service_e3m09u2';
-const EMAILJS_TEMPLATE_ID = 'template_ypz1dpp';
+const EMAILJS_TEMPLATE_ID = 'template_oowx9jh';
 const TO_EMAILS = 'chawanvit.bo@planbmedia.co.th,SUNBEAM_GROUP@PLANBMEDIA.CO.TH';
 // ============================================================
 
@@ -514,16 +514,6 @@ function buildBody() {
   ].join('\n');
 }
 
-// ── Open email client (mailto) — ทำก่อน await เพื่อหลีกเลี่ยง popup blocker ──
-function openMailto(subject, body) {
-  const a = document.createElement('a');
-  a.href = `mailto:${TO_EMAILS}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  a.style.display = 'none';
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(() => document.body.removeChild(a), 500);
-}
-
 // ── Validation ─────────────────────────────────────────────
 function validateField(fieldId, input) {
   const wrapper = document.getElementById('field-' + fieldId);
@@ -563,10 +553,6 @@ document.getElementById('briefForm').addEventListener('submit', async function(e
   const subject = `[Creative Brief] ${val('project')} — ${val('company')} | Due: ${val('due_date')}`;
   const body    = buildBody();
 
-  // ① เปิด email client ทันที (ต้องทำก่อน await เพื่อหลีกเลี่ยง popup blocker)
-  openMailto(subject, body);
-
-  // ② ส่งผ่าน EmailJS
   setLoading(true);
 
   const params = {
@@ -594,12 +580,12 @@ document.getElementById('briefForm').addEventListener('submit', async function(e
   try {
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
     setLoading(false);
-    showToast('success', 'Brief sent! ✓', 'Sent via EmailJS. Email client opened as backup.');
+    showToast('success', 'Brief sent! ✓', 'Your brief has been submitted to the Sunbeam creative team.');
     document.getElementById('briefForm').reset();
   } catch (err) {
     setLoading(false);
     console.error('EmailJS error:', err);
-    showToast('error', 'EmailJS failed — check email client', `Error: ${err?.text || err?.message || 'Unknown'}. Email client draft is your backup.`);
+    showToast('error', 'Submission failed', `Error: ${err?.text || err?.message || 'Unknown'}. Please try again or contact the team directly.`);
   }
 });
 
